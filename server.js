@@ -41,7 +41,9 @@ server.post("/api/login", (req, res) => {
         res.status(401).json({ message: "Bad request. Invalid credentials" });
       }
     })
-    .catch();
+    .catch(err => {
+        res.status(500).json({message: "Coud not login: " + err.message })
+    });
 });
 
 module.exports = server;
