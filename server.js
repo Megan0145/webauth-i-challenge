@@ -42,8 +42,12 @@ server.post("/api/login", (req, res) => {
       }
     })
     .catch(err => {
-        res.status(500).json({message: "Coud not login: " + err.message })
+      res.status(500).json({ message: "Coud not login: " + err.message });
     });
 });
+
+server.get("/api/users", (req, res) => {
+    
+})
 
 module.exports = server;
