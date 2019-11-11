@@ -28,4 +28,20 @@ server.post("/api/register", (req, res) => {
     });
 });
 
+server.post("/api/login", (req, res) => {
+  const { username, password } = req.body;
+  users
+    .findByUsername(username)
+    .then(user => {
+      if (user && bcrypt.compareSync(password, user.password)) {
+        res
+          .status(200)
+          .json({ message: `Welcome ${user.username}!`, id: user.id });
+      } else {
+        res.status(401).json({ message: "Bad request. Invalid credentials" });
+      }
+    })
+    .catch();
+});
+
 module.exports = server;

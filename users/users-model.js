@@ -10,5 +10,7 @@ function add(user) {
 }
 
 function findByUsername(username) {
-    return db("users").where({ username });
+  return db("users")
+    .first()
+    .where({ username });
 }
