@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import axios from 'axios';
+import { StyledForm } from '../styles';
 
 export default function Register(props){
     const username = useRef("");
@@ -19,13 +20,13 @@ export default function Register(props){
         });
     };
     return (
-      <div>
-        REGISTER
+      <StyledForm>
+        <h1>Register</h1>
         <form>
-          <input placeholder="Username" ref={username} />
-          <input placeholder="Password" ref={password} />
+          <input placeholder="Username" ref={username} type="text"/>
+          <input placeholder="Password" ref={password} type="password"/>
           <button onClick={submit}>Go</button>
         </form>
-      </div>
+      </StyledForm>
     );
 }

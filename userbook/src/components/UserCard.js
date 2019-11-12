@@ -6,6 +6,7 @@ export default function UserCard(props) {
     return (
         <StyledUserCard>
             <h3>{user.username}</h3>
+            <button>Add Friend</button>
         </StyledUserCard>
     );
 }

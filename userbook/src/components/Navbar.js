@@ -21,8 +21,8 @@ export default function Navbar(props) {
     <div>
       <StyledNav>
         <div>
-          <NavLink exact to="/">
-            Home
+          <NavLink exact to="/" className='home'>
+            User<span>Book</span>
           </NavLink>
         </div>
         <div>
