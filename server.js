@@ -81,6 +81,8 @@ server.get("/api/logout", (req, res) => {
         res.send("good bye");
       }
     });
+  } else {
+    res.end();
   }
 });
 
