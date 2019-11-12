@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledNav = styled.nav`
   background-color: whitesmoke;
-  width: 100vw;
+  width: 100%;
   height: 8vh;
   display: flex;
   align-items: center;
@@ -31,4 +31,40 @@ export const StyledNav = styled.nav`
       font-size: 1.1rem;
     }
   }
+`;
+
+export const StyledHome = styled.div`
+  background-color: #dedede;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  .jumbo {
+    background-image: url("jumbo.jpg");
+    background-size: 100vw;
+    background-repeat: no-repeat;
+    width: 100%;
+    max-height: 80vh;
+    display: flex;
+    align-items: center;
+    h1 {
+      color: white;
+      margin-left: 5rem;
+      font-size: 6vw;
+      max-width: 45%;
+      text-shadow: 5px 5px 5px #7e5511;
+    }
+  }
+`;
+
+export const StyledUserCard = styled.div`
+  width: 50%;
+  background-color: #ffded6;
+  margin: 2rem 0;
+  height: 7rem;
+  padding: 2rem;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px grey;
+  color: grey;
 `;
