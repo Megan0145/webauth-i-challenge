@@ -10,7 +10,7 @@ export default function Navbar(props) {
     axios
       .get("/api/logout")
       .then(res => {
-        console.log(res);
+        props.history.push("/")
       })
       .catch(err => {
         console.log(err);

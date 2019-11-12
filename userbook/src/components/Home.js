@@ -12,7 +12,7 @@ export default function Home(props){
         .catch(err => {
           console.log(err);
         });
-    }, []);
+    }, [users]);
     if(!users){
         return <p> Login to see users </p>
     }
