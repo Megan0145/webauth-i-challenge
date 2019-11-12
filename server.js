@@ -2,6 +2,7 @@ const express = require("express");
 const server = express();
 const bcrypt = require("bcryptjs");
 const session = require("express-session");
+const KnexSessionStore = require("connect-session-knex")(session);
 
 const users = require("./users/users-model");
 
@@ -9,12 +10,32 @@ const sessionConfig = {
   name: "test",
   secret: "secret value",
   cookie: {
+    // 1 hour, needed if cookie is to survive,
+    // after the browser will try send a cookie and
+    // the server will reject
     maxAge: 1000 * 60 * 60,
+    // should come from env
+    // eg secure: process.env.NODE_ENV === 'development'
+    // cookie only gets set when https!
     secure: false,
-    httpOnly: true,
-    resave: false,
-    saveUninitialized: false
-  }
+    // should cookie be accesible from client JS ?
+    // if fasle our React code will not be able to read cookies
+    // scenarios where React needs access to cookies set on the client
+    // increases risk tho
+    httpOnly: false
+  },
+  // in general should be false,
+  // otherwise express is pretty aggressive about resaving session
+  // even if nothing has changed
+  resave: false,
+  saveUninitialized: false,
+  store: new KnexSessionStore({
+    knex: require("./data/dbConfig"),
+    tablename: "sessions",
+    sidfieldname: "sid",
+    createtable: true,
+    clearInterval: 1000 * 60 * 60
+  })
 };
 
 server.use(express.json());
