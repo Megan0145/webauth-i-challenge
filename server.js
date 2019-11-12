@@ -1,4 +1,6 @@
 const express = require("express");
+const cors = require('cors');
+const helmet = require('helmet');
 const server = express();
 const bcrypt = require("bcryptjs");
 const session = require("express-session");
@@ -38,7 +40,9 @@ const sessionConfig = {
   })
 };
 
+server.use(helmet());
 server.use(express.json());
+server.use(cors());
 server.use(session(sessionConfig));
 
 server.get("/", (req, res) => {
