@@ -8,7 +8,7 @@ import axios from "axios";
 export default function Navbar(props) {
   function logout() {
     axios
-      .get("http://localhost:4500/api/logout")
+      .get("/api/logout")
       .then(res => {
         console.log(res);
       })

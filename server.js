@@ -24,7 +24,7 @@ const sessionConfig = {
     // if fasle our React code will not be able to read cookies
     // scenarios where React needs access to cookies set on the client
     // increases risk tho
-    httpOnly: false
+    httpOnly: true
   },
   // in general should be false,
   // otherwise express is pretty aggressive about resaving session

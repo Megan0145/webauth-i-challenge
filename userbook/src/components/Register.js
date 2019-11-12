@@ -7,7 +7,7 @@ export default function Register(props){
     const submit = e => {
       e.preventDefault();
       axios
-        .post("http://localhost:4500/api/register", {
+        .post("/api/register", {
           username: username.current.value,
           password: password.current.value
         })

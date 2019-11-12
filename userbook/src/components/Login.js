@@ -7,7 +7,7 @@ export default function Login(props) {
   const submit = e => {
     e.preventDefault();
     axios
-      .post("http://localhost:4500/api/login", {
+      .post("/api/login", {
         username: username.current.value,
         password: password.current.value
       })

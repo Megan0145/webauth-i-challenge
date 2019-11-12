@@ -5,15 +5,24 @@ export default function Home(props){
     const [users, setUsers] = useState(null);
     useEffect(() => {
       axios
-        .get("http://localhost:4500/api/users")
+        .get("/api/users")
         .then(res => {
-          console.log(res);
+          setUsers(res.data);
         })
         .catch(err => {
           console.log(err);
         });
     }, []);
+    if(!users){
+        return <p> Login to see users </p>
+    }
     return (
-        <div>HOME</div>
+        <div>
+            {
+                users.map(user => {
+                    return <p>{user.username}</p>
+                })
+            }
+        </div>
     );
 }
