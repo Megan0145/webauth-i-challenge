@@ -45,7 +45,7 @@ server.get("/", (req, res) => {
   res.json("Welcome!");
 });
 
-server.post("/api/register", (req, res) => {
+server.post("/api/register",  validateUser, (req, res) => {
   const { username, password } = req.body;
   const hashedpw = bcrypt.hashSync(password, 11);
   const newUser = {
@@ -59,11 +59,11 @@ server.post("/api/register", (req, res) => {
       res.status(201).json(user);
     })
     .catch(err => {
-      res.json(500).json({ message: "Could not add new user: " + err.message });
+      res.status(500).json({ message: "Could not add new user: " + err.message });
     });
 });
 
-server.post("/api/login", (req, res) => {
+server.post("/api/login",  validateUser, (req, res) => {
   const { username, password } = req.body;
   users
     .findByUsername(username)
@@ -107,27 +107,23 @@ server.get("/api/logout", (req, res) => {
   }
 });
 
-// function restricted(req, res, next) {
-//   const { username, password } = req.headers;
-//   users
-//     .findByUsername(username)
-//     .then(user => {
-//       if (user && bcrypt.compareSync(password, user.password)) {
-//         next();
-//       } else {
-//         res.status(401).json({ message: "You shall not pass: " });
-//       }
-//     })
-//     .catch(err => {
-//       res.status(500).json({ message: err.message });
-//     });
-// }
-
 function restricted(req, res, next) {
   if (req.session && req.session.user) {
     next();
   } else {
     res.status(401).json({ message: "You shall not pass" });
+  }
+}
+
+function validateUser(req, res, next) {
+  if (!Object.keys(req.body).length) {
+    res.status(401).json({ message: "Missing user data" });
+  } else if (!req.body.username) {
+    res.status(401).json({ message: "Missing required username" });
+  } else if (!req.body.password) {
+    res.status(401).json({ message: "Missing required password" });
+  } else {
+    next();
   }
 }
 
