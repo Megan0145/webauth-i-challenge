@@ -43,10 +43,11 @@ const sessionConfig = {
 server.use(helmet());
 server.use(express.json());
 server.use(cors());
+server.use(express.static(__dirname + "/userbook/build"))
 server.use(session(sessionConfig));
 
 server.get("/", (req, res) => {
-  res.json("Welcome!");
+  res.sendFile(__dirname + '/userbook/build/index.html')
 });
 
 server.post("/api/register",  validateUser, (req, res) => {
