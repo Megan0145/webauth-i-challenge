@@ -12,7 +12,7 @@ export default function Login(props) {
         password: password.current.value
       })
       .then(res => {
-        console.log(props.history.push("/"));
+        props.history.push("/");
       })
       .catch(err => {
         console.log(err);
